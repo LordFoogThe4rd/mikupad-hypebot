@@ -1,16 +1,17 @@
 // ==UserScript==
-// @name         mikupad hypebot
-// @namespace    http://tampermonkey.net/
-// @version      1.0.0
-// @description  add NovelAI-like hypebot feature to mikupad
-// @include        *lmg-anon.github.io/mikupad/mikupad.html
-// @include        *localhost:3000*
+// @name         	   mikupad hypebot
+// @namespace    	   http://tampermonkey.net/
+// @version      	   1.0.0
+// @description        add NovelAI-like hypebot feature to mikupad
+// @include            *lmg-anon.github.io/mikupad/mikupad.html
+// @include            *localhost:3000*
 // @require            https://openuserjs.org/src/libs/sizzle/GM_config.js
 // @grant              GM_getValue
 // @grant              GM_setValue
 // @grant              GM.getValue
 // @grant              unsafeWindow
 // @grant              GM.setValue
+// @downloadURL        https://github.com/LordFoogThe4rd/mikupad-hypebot/raw/refs/heads/main/mikupad_hypebot.user.js
 // ==/UserScript==
 
 (function(){
@@ -371,4 +372,5 @@
         childList: true,
         subtree: true
     });
+
 })()
