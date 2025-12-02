@@ -19,7 +19,7 @@ This userscript adds a configurable, AI-powered "Hypebot" to the Mikupad writing
     *   Greasemonkey
     *   Violentmonkey
 
-2.  Install the script. You can do this by opening the `mikupad_hypebot.user.js` file in your browser while the userscript manager is active, or by copying its contents into a new script in your manager's dashboard.
+2.  Install the script. You can do this by [clicking here](https://github.com/LordFoogThe4rd/mikupad-hypebot/raw/refs/heads/main/mikupad_hypebot.user.js)
 
 3.  The script will automatically run when you visit a Mikupad page.
 
@@ -52,5 +52,6 @@ This script is designed to run on:
 
 *   The official Mikupad site: `https://lmg-anon.github.io/mikupad/mikupad.html`
 *   Local instances of Mikupad (e.g., `localhost:3000`).
+
 
 The script relies on the internal React structure of Mikupad to accurately construct the full context. Major updates to Mikupad may break this functionality.
