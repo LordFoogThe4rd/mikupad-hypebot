@@ -1,6 +1,6 @@
 # Mikupad Hypebot Userscript
 
-This userscript adds a configurable, AI-powered "Hypebot" to the Mikupad writing application. The Hypebot provides meta-commentary on your story as you write, similar to the feature found in NovelAI.
+This userscript adds a configurable, AI-powered "Hypebot" to the [Mikupad](https://github.com/lmg-anon/mikupad) writing application. The Hypebot provides meta-commentary on your story as you write, similar to the feature found in NovelAI.
 
 ## Features
 
@@ -55,3 +55,4 @@ This script is designed to run on:
 
 
 The script relies on the internal React structure of Mikupad to accurately construct the full context. Major updates to Mikupad may break this functionality.
+
