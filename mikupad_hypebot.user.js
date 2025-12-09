@@ -62,6 +62,11 @@
                 'type': 'textarea',
                 'default': 'You are a meta-commentary generator. In the user message, you will be given an extract of a creative text. Your job is to generate a JSON object with two fields: "tone" and "comment". The "tone" field must contain the tone of the meta-commentary in a single word, i.e cynical, humorous,  concerned, sarcastic, etc. The "comment" field must contain a single sentence of meta-commentary with the aforementioned tone about the latest details/events in the story directed at the user, who is the author of the story.\nConstraints:\n- Use casual languagen\n- Profanity is allowed\n- Be creative and witty\n- The story may be cut off, so make do with the available context\n- Any tone of voice, negative or positive, is allowed\n- Avoid cliched responses and positivity bias\n\nExamples:\n{"tone": "sarcastic", "comment": "Wow! This must be really poor on your dick!"}\n{"tone": "lecturing", "comment": "You should obey your father\'s commands, even if they seem a little unfair."}\n{"tone": "criticizing", "comment": "But you shouldn\'t need space in a relationship."}\n{"tone": "encouraging", "comment": "Now that your life has been spared, let\'s make sure you really live to tell the tale!"}\n{"tone": "cautionary", "comment": "Maybe you should start keeping track of where your next meal is coming from..."}' //todo: make a better prompt, this one generates really sloppy comments (or maybe it's model's fault?)
             },
+            'ReplyRegex': {
+                'label': 'Regex to match the comment in the model\'s response',
+                'type' : 'text',
+                'default' : '(?<="comment"\s*:\s*")(.*?)(?=")'
+            },
             'MinCommentInterval': {
                 'label': 'Minimum interval between comments (in seconds)',
                 'type': 'number',
@@ -283,30 +288,7 @@
             ],
             'temperature': temperature,
             'max_tokens': maxOutput,
-            'stream': false,
-            'structured_outputs': true,
-            'response_format': {
-                'type': 'json_schema',
-                'json_schema': {
-                    'name': 'comment',
-                    'strict': true,
-                    'schema': {
-                        'type': 'object',
-                        'properties': {
-                            'tone': {
-                                'type': 'string',
-                                'description': 'The tone of the meta-commentary.'
-                            },
-                            'comment': {
-                                'type': 'string',
-                                'description': 'The meta-commentary. One single sentence.'
-                            }
-                        },
-                        'required': ['tone', 'comment'],
-                        'additionalProperties': false
-                    }
-                }
-            }
+            'stream': false
         }
         const response = fetch(url, { // Note: fetch is already async and returns a promise
             method: 'POST',
@@ -343,10 +325,13 @@
                 try {
                     const response = await generateComment();
                     const data = await response.json();
-                    const comment = JSON.parse(data.choices[0].message.content);
-                    //debug
-                    console.log(comment);
-                    commentText.textContent = comment.comment;
+                    if (gmc.get('ReplyRegex') !== '') {
+                        const pattern = new RegExp(gmc.get('ReplyRegex'), 'g');
+                        const comment = data.choices[0].message.content.match(pattern)[0];
+                        commentText.textContent = comment.comment;
+                    } else {
+                        commentText.textContent = data.choices[0].message.content;
+                    };
                     cachedText = currentText;
                 } catch (error) {
                     console.error("Hypebot: Error generating or displaying comment:", error);
