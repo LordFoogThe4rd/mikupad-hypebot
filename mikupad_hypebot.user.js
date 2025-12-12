@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         	   mikupad hypebot
 // @namespace    	   http://tampermonkey.net/
-// @version      	   1.0.0
+// @version      	   1.1.0
 // @description        add NovelAI-like hypebot feature to mikupad
 // @include            *lmg-anon.github.io/mikupad/mikupad.html
 // @include            *localhost:3000*
@@ -359,3 +359,4 @@
     });
 
 })()
+
